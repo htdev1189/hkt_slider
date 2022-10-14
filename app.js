@@ -158,8 +158,8 @@ hkt_slider.addEventListener('mouseleave', function () {
 // touch and drag mouse
 
 var index = 1;
-var posX1;
-var posX2;
+var posX1=0;
+var posX2=0;
 var initPosition;
 var finalPosition;
 var enter = false;
@@ -181,10 +181,9 @@ function dragStart(e) {
 }
 
 function dragEnd() {
-    enter = false;
     if (Math.abs(posX2 - posX1) > 50) {
         if (posX2 < posX1) {
-            console.log("next");
+            // console.log("next");
 
             if (current_index < total_item - 1) {
                 current_index++;
@@ -193,9 +192,11 @@ function dragEnd() {
                 removeClass();
                 addClass(current_index);
             }
+            console.log("next-1-index " + current_index);
+            console.log("next-1-dots " + dots_current);
 
-        } else {
-            console.log("prev");
+        } else if (posX2 > posX1) {
+            // console.log("prev");
 
             if (current_index > 0) {
                 current_index--;
@@ -204,9 +205,14 @@ function dragEnd() {
                 removeClass();
                 addClass(current_index);
             }
+            console.log("next-1-index " + current_index);
+            console.log("next-1-dots " + dots_current);
         }
     }
-    console.log("end");
+    enter = false;
+    posX1 = 0;
+    posX2 = 0;
+    // console.log("end");
 }
 
 function dragMove(e) {
