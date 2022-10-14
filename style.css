@@ -46,6 +46,17 @@ div#hkt_nav span {
     transition: all .5s;
 }
 
+.hkt_slider_item a {
+    border: 1px solid red;
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.hkt_slider_item img {
+    width: 100%;
+}
+
 
 div#hkt_slider_out:after {
     display: table;

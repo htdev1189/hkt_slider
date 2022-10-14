@@ -113,7 +113,7 @@ hkt_prev.addEventListener('click', function () {
     // current_index--;
     if (current_index > 0) {
         current_index--;
-        dots_current--;
+        dots_current = dots_current > 0 ? dots_current - 1 : total_item - 1;
         hkt_tranform(current_index);
         removeClass();
         addClass(current_index);
@@ -154,3 +154,70 @@ hkt_slider.addEventListener('mouseleave', function () {
     run();
 });
 
+
+// touch and drag mouse
+
+var index = 1;
+var posX1;
+var posX2;
+var initPosition;
+var finalPosition;
+var enter = false;
+
+hkt_slider_out.addEventListener("mousedown", dragStart);
+function dragStart(e) {
+    e.preventDefault();
+    enter = true;
+    if (e.type == 'touchstart') {
+        posX1 = e.touches[0].clientX;
+    } else {
+        posX1 = e.clientX;
+
+        window.addEventListener("mouseup", dragEnd);
+        window.addEventListener("mousemove", dragMove);
+    }
+    // diem dau tien
+    // console.log("posx1 " + posX1);
+}
+
+function dragEnd() {
+    enter = false;
+    if (Math.abs(posX2 - posX1) > 50) {
+        if (posX2 < posX1) {
+            console.log("next");
+
+            if (current_index < total_item - 1) {
+                current_index++;
+                dots_current = dots_current < total_item - 1 ? dots_current + 1 : 0;
+                hkt_tranform(current_index);
+                removeClass();
+                addClass(current_index);
+            }
+
+        } else {
+            console.log("prev");
+
+            if (current_index > 0) {
+                current_index--;
+                dots_current = dots_current > 0 ? dots_current - 1 : total_item - 1;
+                hkt_tranform(current_index);
+                removeClass();
+                addClass(current_index);
+            }
+        }
+    }
+    console.log("end");
+}
+
+function dragMove(e) {
+    if (!enter) {
+        return;
+    }
+    if (e.type == 'touchmove') {
+        posX2 = e.touches[0].clientX;
+    } else {
+        posX2 = e.clientX;
+    }
+    // diem thu 2 sau khi ket thuc  move
+    // console.log("posx2 " + posX2);
+}
