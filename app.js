@@ -2,9 +2,10 @@ const hkt_slider = document.getElementById('hkt_slider');
 const hkt_slider_out = document.getElementById('hkt_slider_out');
 const total_item = document.querySelectorAll(".hkt_slider_item").length;
 
-var current_index = 1;
-var check_first = true;
-var check_second = true;
+var current_index = 0;
+//var check_first = true;
+//var check_second = true;
+var dots_current = 1;
 // set width
 hkt_slider_out.style.width = `${total_item * 100}vw`;
 
@@ -59,9 +60,9 @@ function removeClass() {
 }
 
 // set class active with index
-function addClass(index){
+function addClass(index) {
     let all_li = Array.from(document.querySelectorAll('.hkt_dots_li'));
-    all_li.forEach((element,i) => {
+    all_li.forEach((element, i) => {
         if (i == index) {
             element.classList.add('active');
         }
@@ -82,6 +83,10 @@ if (hkt_dots) {
 
                 // set state current
                 current_index = index;
+                dots_current = (current_index + 1) < total_item ? current_index + 1 : 0;
+
+                console.log("next-1-index " + current_index);
+                console.log("next-1-dots " + dots_current);
 
                 // slider transform
                 hkt_tranform(index);
@@ -92,66 +97,60 @@ if (hkt_dots) {
 
 const hkt_next = document.getElementById('hkt_next');
 hkt_next.addEventListener('click', function () {
-    if (check_first) {
-        current_index--;
-        check_first = false;
-    }
     if (current_index < total_item - 1) {
-        current_index += 1;
+        current_index++;
+        dots_current = dots_current < total_item - 1 ? dots_current + 1 : 0;
         hkt_tranform(current_index);
         removeClass();
         addClass(current_index);
-        if (check_second==false) {
-            current_index = current_index+1 < total_item ? current_index+1 : 0;
-        }
     }
-    console.log("after next "+current_index);
+    console.log("next-1-index " + current_index);
+    console.log("next-1-dots " + dots_current);
 });
 
 const hkt_prev = document.getElementById('hkt_prev');
 hkt_prev.addEventListener('click', function () {
-    if (check_first) {
-        current_index--;
-        check_first = false;
-    }
     // current_index--;
     if (current_index > 0) {
-        current_index -= 1;
+        current_index--;
+        dots_current--;
         hkt_tranform(current_index);
         removeClass();
         addClass(current_index);
-        if (check_second) {
-            current_index++;
-            check_second = false;
-        }
     }
-    console.log("after prev "+current_index);
+    console.log("next-1-index " + current_index);
+    console.log("next-1-dots " + dots_current);
 });
 
 
 // auto 
 var interVal;
-function run(){
-    interVal = setInterval(function(){
-        console.log(current_index);
-        hkt_tranform(current_index);
+function run() {
+    interVal = setInterval(function () {
+        hkt_tranform(dots_current);
         removeClass();
-        addClass(current_index)
+        addClass(dots_current)
         current_index++;
-        if(current_index==total_item){
-            current_index=0;
+        dots_current++;
+        if (dots_current == total_item) {
+            dots_current = 0;
         }
-    },2000);
+        if (current_index == total_item) {
+            current_index = 0;
+        }
+
+        console.log("next-index = " + current_index);
+        console.log("next-dots-index = " + dots_current);
+    }, 3000);
 }
 run();
 
 
-//hover hkt_slider
-hkt_slider.addEventListener('mouseover',function(){
+// hover hkt_slider
+hkt_slider.addEventListener('mouseover', function () {
     clearInterval(interVal);
 });
-hkt_slider.addEventListener('mouseleave',function(){
-    check_first = true;
+hkt_slider.addEventListener('mouseleave', function () {
     run();
 });
 
