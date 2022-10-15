@@ -29,6 +29,7 @@ hkt_slider.appendChild(hkt_dots);
 // create nav
 const hkt_nav = document.createElement('div');
 hkt_nav.setAttribute('id', 'hkt_nav');
+
 const hkt_next_dom = document.createElement('span');
 const hkt_next_text = document.createTextNode(">>");
 hkt_next_dom.setAttribute('id', 'hkt_next')
@@ -39,10 +40,12 @@ const hkt_prev_text = document.createTextNode("<<");
 hkt_prev_dom.setAttribute('id', 'hkt_prev')
 hkt_prev_dom.appendChild(hkt_prev_text);
 
-hkt_nav.appendChild(hkt_prev_dom);
-hkt_nav.appendChild(hkt_next_dom);
+// hkt_nav.appendChild(hkt_prev_dom);
+// hkt_nav.appendChild(hkt_next_dom);
 
-hkt_slider.appendChild(hkt_nav);
+// hkt_slider.appendChild(hkt_nav);
+hkt_slider.appendChild(hkt_prev_dom);
+hkt_slider.appendChild(hkt_next_dom);
 
 // func transform with index
 
