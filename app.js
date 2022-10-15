@@ -139,8 +139,8 @@ function run() {
             current_index = 0;
         }
 
-        console.log("next-index = " + current_index);
-        console.log("next-dots-index = " + dots_current);
+        // console.log("next-index = " + current_index);
+        // console.log("next-dots-index = " + dots_current);
     }, 3000);
 }
 run();
@@ -181,7 +181,8 @@ function dragStart(e) {
 }
 
 function dragEnd() {
-    if (Math.abs(posX2 - posX1) > 50) {
+    if (Math.abs(posX2 - posX1) > 50 && posX2 != 0) {
+        console.log("adadad");
         if (posX2 < posX1) {
             // console.log("next");
 
@@ -212,7 +213,7 @@ function dragEnd() {
     enter = false;
     posX1 = 0;
     posX2 = 0;
-    // console.log("end");
+    console.log("end");
 }
 
 function dragMove(e) {
