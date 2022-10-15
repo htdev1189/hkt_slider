@@ -22,7 +22,7 @@ div#hkt_nav {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    /* transform: translate(-50%,-50%); */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -39,9 +39,9 @@ div#hkt_nav span {
 
 span#hkt_prev {
     position: absolute;
-    top: 45%;
+    top: 40%;
     left: 5%;
-    transform: translate(-50%,-50%);
+    /* transform: translate(-50%,-50%); */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -58,9 +58,9 @@ span#hkt_prev:hover, span#hkt_next:hover {
 
 span#hkt_next {
     position: absolute;
-    top: 45%;
+    top: 40%;
     right: 5%;
-    transform: translate(-50%,-50%);
+    /* transform: translate(-50%,-50%); */
     display: flex;
     align-items: center;
     justify-content: space-between;
